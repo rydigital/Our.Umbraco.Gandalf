@@ -271,6 +271,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\NotAllowedLastChangeContentFinder.cs" />
     <Compile Include="Core\Extensions\AllowedIpExtensions.cs" />
     <Compile Include="Core\Models\DTOs\AllowedIpDto.cs" />
     <Compile Include="Core\Services\AllowedIpService.cs" />

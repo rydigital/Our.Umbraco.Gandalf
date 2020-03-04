@@ -5,14 +5,15 @@ using Our.Umbraco.Gandalf.Core.Services;
 
 namespace Our.Umbraco.Gandalf.Core.StartUp
 {
-	public class GandalfComposer : IComposer
-    {
-        public void Compose(Composition composition)
-        {
-            composition.Register(typeof(IAllowedIpService), typeof(AllowedIpService));
+	public class GandalfComposer : IUserComposer
+	{
+		public void Compose(Composition composition)
+		{
+			composition.Register(typeof(IAllowedIpService), typeof(AllowedIpService));
 			composition.Register(typeof(IRepository), typeof(AllowedIpRepository));
 
-            composition.ContentFinders().Insert<AllowedIpContentFinder>(0);
-        }
-    }
+			composition.ContentFinders().Insert<NotAllowedLastChangeContentFinder>(0);
+			composition.ContentFinders().Insert<AllowedIpContentFinder>(1);
+		}
+	}
 }

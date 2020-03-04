@@ -1,30 +1,30 @@
 ﻿using Umbraco.Web.Routing;
-using Our.Umbraco.Gandalf.Core.Repositories;
+using Our.Umbraco.Gandalf.Core.Services;
 
 namespace Our.Umbraco.Gandalf.Core
 {
 	public class AllowedIpContentFinder : IContentFinder
 	{
-		public IRepository _repository;
-		public AllowedIpContentFinder(IRepository repository)
+		private readonly IAllowedIpService _allowedIpService;
+
+		public AllowedIpContentFinder(IAllowedIpService allowedIpService)
 		{
-			_repository = repository;
+			_allowedIpService = allowedIpService;
 		}
 
 		public bool TryFindContent(PublishedRequest request)
 		{
-			// TODO: change this to be IP based - also check for ip-not-allowed
-			var path = request.Uri.PathAndQuery.ToLower();
+			var ip = request.UmbracoContext.HttpContext.Request.UserHostAddress;
 
-			var item = _repository.GetByIpAddress(path);
-			if (item == null)
+			var item = _allowedIpService.GetByIpAddress(ip);
+			if (item != null)
 			{
-				return false;
+				request.SetRedirect("/ip-not-allowed");
+
+				return true;
 			}
 
-			request.SetRedirect("/ip-not-allowed"); // TODO: actually handle this!
-			
-			return true;
+			return false;
 		}
 	}
 }

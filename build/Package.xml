@@ -2,10 +2,10 @@
 <umbPackage>
 	<info>
 		<package>
-			<name>Our.Umbraco.Simple301</name>
+			<name>Our.Umbraco.Gandalf</name>
 			<version>1.0.0</version>
 			<license url="http://opensource.org/licenses/MIT">MIT License</license>
-			<url>https://github.com/rydigital/Our.Umbraco.Simple301</url>
+			<url>https://github.com/rydigital/Our.Umbraco.Gandalf</url>
 			<requirements type="Strict">
 				<major>8</major>
 				<minor>1</minor>

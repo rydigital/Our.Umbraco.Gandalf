@@ -2,6 +2,7 @@
 using Our.Umbraco.Gandalf.Core.Models.DTOs;
 using Our.Umbraco.Gandalf.Core.Models.Pocos;
 using Our.Umbraco.Gandalf.Core.Repositories;
+using Our.Umbraco.OpenKeyValue.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,21 @@ namespace Our.Umbraco.Gandalf.Core.Services
 		AllowedIpDto Create(string ipAddress, string notes);
 		IEnumerable<AllowedIpDto> GetAll();
 		AllowedIpDto Update(AllowedIpDto poco);
+		AllowedIpDto UpdateAppStatus(string key, string value);
 		void Delete(int id);
 	}
 
 	public class AllowedIpService : IAllowedIpService
 	{
 		private readonly IRepository _repository;
+		private readonly IOpenKeyValueService _service;
 
-		public AllowedIpService(IRepository repository)
+		public AllowedIpService(IRepository repository, IOpenKeyValueService service)
 		{
 			_repository = repository;
+			_service = service;
 		}
+
 
 		public AllowedIpDto Create(string ipAddress, string notes)
 		{
@@ -76,6 +81,18 @@ namespace Our.Umbraco.Gandalf.Core.Services
 			};
 
 			return _repository.Update(poco).ToDto();
+		}
+
+		public AllowedIpDto UpdateAppStatus(string key, string value)
+		{
+
+			var item = _service.Set(key, value);
+
+			bool exists = _service.Exists(key);
+
+			_service.Delete(key);
+			return _repository.GetById(0).ToDto();
+
 		}
 	}
 }

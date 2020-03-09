@@ -85,11 +85,18 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
         }
 
 		[HttpPost]
-		public UpdateStatus ToggleStatus(UpdateStatus model)
+		public UpdateResponse ToggleStatus(UpdateStatus model)
 		{
-			// return the new value 
-			var status = model.CurrentStatus;
-			return model;
+		
+			try
+			{
+				var item = _allowedIpService.UpdateAppStatus("Our.Umbraco.Gandlaf.Status", model.CurrentStatus.ToString());
+				return new UpdateResponse() { Success = true, Item = item };
+			}
+			catch (Exception e)
+			{
+				return new UpdateResponse() { Success = false, Message = "There was an error updating the status"};
+			}
 
 		}
 	}

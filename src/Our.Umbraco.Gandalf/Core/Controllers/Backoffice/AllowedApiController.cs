@@ -85,10 +85,12 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
         }
 
 		[HttpPost]
-		public void ToggleStatus(bool currentStatus)
+		public UpdateStatus ToggleStatus(UpdateStatus model)
 		{
+			// return the new value 
+			var status = model.CurrentStatus;
+			return model;
 
-			throw new Exception("this works!");
 		}
 	}
 }

@@ -275,7 +275,7 @@ angular.module("umbraco.resources").factory("GandalfApi", function ($http) {
 
         //Toggle gandalf status
         toggleStatus: function (data) {
-            return $http.post("backoffice/Gandalf/AllowedIpApi/toggleStatus", data);
+            return $http.post("backoffice/Gandalf/AllowedIpApi/ToggleStatus", data);
         }
     };
 });

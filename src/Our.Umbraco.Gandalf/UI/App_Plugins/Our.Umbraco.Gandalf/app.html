@@ -11,10 +11,10 @@
                         Gandalf
                     </h1>
 
-                    <!-- Clear Cache -->
+                    <!-- Turn Gandalf Off -->
                     <div class="pull-right">
-                        <span ng-show="cacheCleared">Cache Cleared!</span>
-                        <button class="btn btn-info btn-sm" ng-click="clearCache()">Clear Cache</button>
+                        <span>Click to toggle on and off:</span>
+                        <button class="btn btn-info btn-sm" ng-click="toggleStatus()">Status : <span>{{status ? "Enabled" : "disabled" }}</span></button>
                     </div>
 
                     <p class="lead">

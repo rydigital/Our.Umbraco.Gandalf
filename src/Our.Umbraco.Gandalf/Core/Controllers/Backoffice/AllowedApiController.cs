@@ -83,5 +83,12 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
         {
 			throw new Exception("Not sure if we should implement this");
         }
-    }
+
+		[HttpPost]
+		public void ToggleStatus(bool currentStatus)
+		{
+
+			throw new Exception("this works!");
+		}
+	}
 }

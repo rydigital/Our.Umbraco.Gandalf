@@ -12,6 +12,7 @@ angular.module("umbraco").controller("GandalfController", function ($scope, $fil
     //App state
     $scope.initialLoad = false;
     $scope.cacheCleared = false;
+    $scope.status = false;
 
     $scope.refreshTable = function () {
         //If we aren't set up yet, return
@@ -28,6 +29,15 @@ angular.module("umbraco").controller("GandalfController", function ($scope, $fil
     $scope.clearCache = function () {
         $scope.cacheCleared = true;
         return GandalfApi.clearCache().then($scope.fetchItems.bind(this));
+    }
+
+    /*
+  * Handles enabling and disabling
+  * Gandalf
+  */
+    $scope.toggleStatus = function () {
+        $scope.status = !$scope.status;
+        return GandalfApi.toggleStatus($scope.status);
     }
 
     /*
@@ -261,6 +271,11 @@ angular.module("umbraco.resources").factory("GandalfApi", function ($http) {
         //Clear cache
         clearCache: function () {
             return $http.post("backoffice/Gandalf/AllowedIpApi/ClearCache");
+        },
+
+        //Toggle gandalf status
+        toggleStatus: function (data) {
+            return $http.post("backoffice/Gandalf/AllowedIpApi/toggleStatus", data);
         }
     };
 });

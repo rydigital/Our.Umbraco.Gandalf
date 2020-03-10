@@ -18,7 +18,9 @@ namespace Our.Umbraco.Gandalf.Core
 			var status = _allowedIpService.GetStatus();
 
 			var item = _allowedIpService.GetByIpAddress(ip);
-			if (item != null && status.ToString() == "True")
+			bool.TryParse(status.Value, out bool boolValue); 
+
+			if (item != null && boolValue)
 			{
 				request.SetRedirect("/ip-not-allowed");
 

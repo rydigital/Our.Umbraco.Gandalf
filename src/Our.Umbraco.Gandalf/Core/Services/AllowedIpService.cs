@@ -18,6 +18,7 @@ namespace Our.Umbraco.Gandalf.Core.Services
 		IEnumerable<AllowedIpDto> GetAll();
 		AllowedIpDto Update(AllowedIpDto poco);
 		KeyValueDto UpdateAppStatus(string key, string value);
+		KeyValueDto GetStatus();
 		void Delete(int id);
 	}
 
@@ -86,7 +87,6 @@ namespace Our.Umbraco.Gandalf.Core.Services
 
 		public KeyValueDto UpdateAppStatus(string key, string value)
 		{
-
 			var poco = new IsEnabled()
 			{
 				Key = key,
@@ -94,6 +94,10 @@ namespace Our.Umbraco.Gandalf.Core.Services
 			};
 			return this._service.Set(poco.Key, poco.Enabled);
 
+		}
+		public KeyValueDto GetStatus()
+		{
+			return _service.Get("Our.Umbraco.Gandalf.Status");
 		}
 	}
 }

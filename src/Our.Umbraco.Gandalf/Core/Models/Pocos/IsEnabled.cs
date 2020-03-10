@@ -13,8 +13,12 @@ namespace Our.Umbraco.Gandalf.Core.Models.Pocos
 		[PrimaryKeyColumn(AutoIncrement = true)]
 		public int Id { get; set; }
 
+		[Column("Key")]
+		[PrimaryKeyColumn(AutoIncrement = true)]
+		public string Key { get; set; }
+
 		[Column("Enabled")]
-		public bool Enabled { get; set; }
+		public string Enabled { get; set; }
 
 	}
 }

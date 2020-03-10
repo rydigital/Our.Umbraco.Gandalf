@@ -91,11 +91,11 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 			try
 			{
 				var item = _allowedIpService.UpdateAppStatus("Our.Umbraco.Gandlaf.Status", model.CurrentStatus.ToString());
-				return new UpdateResponse() { Success = true, Item = item };
+				return new UpdateResponse() { Success = true, Message = "Status successfully updated" };
 			}
 			catch (Exception e)
 			{
-				return new UpdateResponse() { Success = false, Message = "There was an error updating the status"};
+				return new UpdateResponse() { Success = false, Message = "There was an error updating the status" + e.Message };
 			}
 
 		}

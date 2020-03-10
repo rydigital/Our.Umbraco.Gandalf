@@ -13,7 +13,7 @@
 
                     <!-- Turn Gandalf Off -->
                     <div class="pull-right">
-                        <button class="btn btn-info btn-sm" ng-click="toggleStatus()">Status : <span>{{status ? "Enabled" : "disabled" }}</span></button>
+                        <button ng-class="{'btn btn-primary btn-sm': status, 'btn btn-info btn-sm': !status}" ng-click="toggleStatus()"  >Status : <span>{{status ? "Enabled" : "disabled" }}</span></button>
                     </div>
 
                     <p class="lead">

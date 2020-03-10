@@ -1,4 +1,5 @@
-﻿using Our.Umbraco.Gandalf.Core.Extensions;
+﻿using Our.Umbraco.Gandalf.Core.Constants;
+using Our.Umbraco.Gandalf.Core.Extensions;
 using Our.Umbraco.Gandalf.Core.Models.DTOs;
 using Our.Umbraco.Gandalf.Core.Models.Pocos;
 using Our.Umbraco.Gandalf.Core.Repositories;
@@ -7,6 +8,7 @@ using Our.Umbraco.OpenKeyValue.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Our.Umbraco.Gandalf.Core.Constants;
 
 namespace Our.Umbraco.Gandalf.Core.Services
 {
@@ -97,7 +99,7 @@ namespace Our.Umbraco.Gandalf.Core.Services
 		}
 		public KeyValueDto GetStatus()
 		{
-			return _service.Get("Our.Umbraco.Gandalf.Status");
+			return _service.Get(GandalfConstants.Key);
 		}
 	}
 }

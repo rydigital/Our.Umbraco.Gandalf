@@ -274,6 +274,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Constants\GandalfConstants.cs" />
     <Compile Include="Core\Models\Api\Enums\ResponseType.cs" />
     <Compile Include="Core\Models\Api\UpdateStatus.cs" />
     <Compile Include="Core\Models\Pocos\IsEnabled.cs" />

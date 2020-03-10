@@ -1,4 +1,5 @@
 ﻿using Our.Umbraco.Gandalf.Core.Models;
+using Our.Umbraco.Gandalf.Core.Constants;
 using Our.Umbraco.Gandalf.Core.Models.DTOs;
 using Our.Umbraco.Gandalf.Core.Services;
 using System;
@@ -90,7 +91,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 		
 			try
 			{
-				var item = _allowedIpService.UpdateAppStatus("Our.Umbraco.Gandalf.Status", model.CurrentStatus.ToString());
+				var item = _allowedIpService.UpdateAppStatus(GandalfConstants.Key, model.CurrentStatus.ToString());
 				return new UpdateResponse() { Success = true, Message = "Status successfully updated" };
 			}
 			catch (Exception e)

@@ -8,7 +8,7 @@ namespace Our.Umbraco.Gandalf.Core.Constants
 {
 	public class GandalfConstants
 	{
-		public const string Key = "Our.Umbraco.Gandalf.Status";
+		public const string Key = "Our.Umbraco.Gandalf.Enabled";
 
 	}
 }

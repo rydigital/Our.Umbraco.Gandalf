@@ -275,8 +275,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Constants\GandalfConstants.cs" />
-    <Compile Include="Core\Models\Api\Enums\ResponseType.cs" />
-    <Compile Include="Core\Models\Api\StatusResponse.cs" />
+    <Compile Include="Core\Models\Api\Response\StatusResponse.cs" />
     <Compile Include="Core\Models\Api\UpdateStatus.cs" />
     <Compile Include="Core\Models\Pocos\IsEnabled.cs" />
     <Compile Include="Core\NotAllowedLastChangeContentFinder.cs" />
@@ -287,12 +286,12 @@
     <Compile Include="Core\Extensions\StringExtensions.cs" />
     <Compile Include="Core\Repositories\IRepository.cs" />
     <Compile Include="Core\StartUp\Migrations\CreateAllowedIpTable.cs" />
-    <Compile Include="Core\Models\Api\AddRequest.cs" />
-    <Compile Include="Core\Models\Api\AddResponse.cs" />
-    <Compile Include="Core\Models\Api\DeleteResponse.cs" />
+    <Compile Include="Core\Models\Api\Request\AddRequest.cs" />
+    <Compile Include="Core\Models\Api\Response\AddResponse.cs" />
+    <Compile Include="Core\Models\Api\Response\DeleteResponse.cs" />
     <Compile Include="Core\Models\Pocos\AllowedIp.cs" />
-    <Compile Include="Core\Models\Api\UpdateRequest.cs" />
-    <Compile Include="Core\Models\Api\UpdateResponse.cs" />
+    <Compile Include="Core\Models\Api\Response\UpdateRequest.cs" />
+    <Compile Include="Core\Models\Api\Response\UpdateResponse.cs" />
     <Compile Include="Core\Controllers\Backoffice\AllowedApiController.cs" />
     <Compile Include="Core\StartUp\IpLockerComposer.cs" />
     <Compile Include="Core\AllowedIpContentFinder.cs" />

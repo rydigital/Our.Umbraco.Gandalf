@@ -8,7 +8,7 @@ using Our.Umbraco.OpenKeyValue.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Our.Umbraco.Gandalf.Core.Constants;
+
 
 namespace Our.Umbraco.Gandalf.Core.Services
 {
@@ -19,7 +19,7 @@ namespace Our.Umbraco.Gandalf.Core.Services
 		AllowedIpDto Create(string ipAddress, string notes);
 		IEnumerable<AllowedIpDto> GetAll();
 		AllowedIpDto Update(AllowedIpDto poco);
-		KeyValueDto UpdateAppStatus(string key, string value);
+		KeyValueDto UpdateAppStatus(string value);
 		KeyValueDto GetStatus();
 		void Delete(int id);
 	}
@@ -87,11 +87,11 @@ namespace Our.Umbraco.Gandalf.Core.Services
 			return _repository.Update(poco).ToDto();
 		}
 
-		public KeyValueDto UpdateAppStatus(string key, string value)
+		public KeyValueDto UpdateAppStatus(string value)
 		{
 			var poco = new IsEnabled()
 			{
-				Key = key,
+				Key = GandalfConstants.Key,
 				Enabled = value
 			};
 			return this._service.Set(poco.Key, poco.Enabled);
@@ -99,7 +99,12 @@ namespace Our.Umbraco.Gandalf.Core.Services
 		}
 		public KeyValueDto GetStatus()
 		{
-			return _service.Get(GandalfConstants.Key);
+			var status = _service.Get(GandalfConstants.Key);
+			if (status != null) { return status; }
+			status = UpdateAppStatus("false");
+			return status;
+			
+			
 		}
 	}
 }

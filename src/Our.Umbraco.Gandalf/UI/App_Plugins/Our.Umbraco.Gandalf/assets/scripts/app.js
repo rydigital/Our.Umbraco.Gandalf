@@ -26,8 +26,8 @@ angular.module("umbraco").controller("GandalfController", function ($scope, $fil
     * Handles getting the app
     * status upon load
     */
-    $scope.returnStatus = function () {
-        return GandalfApi.returnStatus().then(function (response) { $scope.enabled = response.data.Enabled; });
+    $scope.getStatus = function () {
+        return GandalfApi.getStatus().then(function (response) { $scope.enabled = response.data.Enabled; });
     }
     /*
   * Handles enabling and disabling
@@ -212,7 +212,7 @@ angular.module("umbraco").controller("GandalfController", function ($scope, $fil
     * Initial load function to set loaded state
     */
     $scope.initLoad = function () {
-        $scope.returnStatus();
+        $scope.getStatus();
         if (!$scope.initialLoad) {
             //Get the available log dates to view log entries for.
             $scope.fetchItems()
@@ -278,8 +278,8 @@ angular.module("umbraco.resources").factory("GandalfApi", function ($http) {
         },
 
         //return status
-        returnStatus: function () {
-            return $http.post("backoffice/Gandalf/AllowedIpApi/ReturnStatus");
+        getStatus: function () {
+            return $http.post("backoffice/Gandalf/AllowedIpApi/getStatus");
         }
     };
 });

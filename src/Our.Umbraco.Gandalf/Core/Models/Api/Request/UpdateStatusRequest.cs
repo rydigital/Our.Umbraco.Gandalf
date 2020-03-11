@@ -1,7 +1,7 @@
-﻿namespace Our.Umbraco.Gandalf.Core.Models
+﻿namespace Our.Umbraco.Gandalf.Core.Models.Api.Request
 {
 
-	public class UpdateStatus
+	public class UpdateStatusRequest
 	{
         public bool CurrentStatus { get; set; }
 		public bool Updated { get; set;}

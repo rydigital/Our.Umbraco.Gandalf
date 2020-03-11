@@ -61,7 +61,7 @@ namespace Our.Umbraco.Gandalf.Core.Services
 
 		public AllowedIpDto GetByIpAddress(string ipAddress)
 		{
-			return _repository.GetByIpAddress(ipAddress).ToDto();
+			return _repository.GetByIpAddress(ipAddress)?.ToDto();
 		}
 
 		public IEnumerable<AllowedIpDto> GetAll()
@@ -89,22 +89,22 @@ namespace Our.Umbraco.Gandalf.Core.Services
 
 		public KeyValueDto UpdateAppStatus(string value)
 		{
-			var poco = new IsEnabled()
-			{
-				Key = GandalfConstants.Key,
-				Enabled = value
-			};
-			return this._service.Set(poco.Key, poco.Enabled);
-
+			return this._service.Set(GandalfConstants.Key, value);
 		}
+
 		public KeyValueDto GetStatus()
 		{
 			var status = _service.Get(GandalfConstants.Key);
-			if (status != null) { return status; }
-			status = UpdateAppStatus("false");
+			
+			if (status != null) 
+			{ 
+				return status; 
+			}
+			
+			// when there is no status, set it to false
+			status = UpdateAppStatus(false.ToString());
+			
 			return status;
-			
-			
 		}
 	}
 }

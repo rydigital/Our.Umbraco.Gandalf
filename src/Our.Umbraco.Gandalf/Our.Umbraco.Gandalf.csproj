@@ -276,8 +276,7 @@
   <ItemGroup>
     <Compile Include="Core\Constants\GandalfConstants.cs" />
     <Compile Include="Core\Models\Api\Response\StatusResponse.cs" />
-    <Compile Include="Core\Models\Api\UpdateStatus.cs" />
-    <Compile Include="Core\Models\Pocos\IsEnabled.cs" />
+    <Compile Include="Core\Models\Api\Request\UpdateStatusRequest.cs" />
     <Compile Include="Core\NotAllowedLastChangeContentFinder.cs" />
     <Compile Include="Core\Extensions\AllowedIpExtensions.cs" />
     <Compile Include="Core\Models\DTOs\AllowedIpDto.cs" />
@@ -290,7 +289,7 @@
     <Compile Include="Core\Models\Api\Response\AddResponse.cs" />
     <Compile Include="Core\Models\Api\Response\DeleteResponse.cs" />
     <Compile Include="Core\Models\Pocos\AllowedIp.cs" />
-    <Compile Include="Core\Models\Api\Response\UpdateRequest.cs" />
+    <Compile Include="Core\Models\Api\Request\UpdateRequest.cs" />
     <Compile Include="Core\Models\Api\Response\UpdateResponse.cs" />
     <Compile Include="Core\Controllers\Backoffice\AllowedApiController.cs" />
     <Compile Include="Core\StartUp\IpLockerComposer.cs" />

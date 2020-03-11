@@ -14,9 +14,16 @@ namespace Our.Umbraco.Gandalf.Core
 
 		public bool TryFindContent(PublishedRequest request)
 		{
-			var ip = request.UmbracoContext.HttpContext.Request.UserHostAddress;
+			var status = _allowedIpService.GetStatus();
 
+			if (status.Value != true.ToString())
+			{
+				return false;
+			}
+
+			var ip = request.UmbracoContext.HttpContext.Request.UserHostAddress;
 			var item = _allowedIpService.GetByIpAddress(ip);
+
 			if (item != null)
 			{
 				request.SetRedirect("/ip-not-allowed");

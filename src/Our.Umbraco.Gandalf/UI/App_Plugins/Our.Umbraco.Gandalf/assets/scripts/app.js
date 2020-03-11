@@ -12,6 +12,7 @@ angular.module("umbraco").controller("GandalfController", function ($scope, $fil
     //App state
     $scope.initialLoad = false;
     $scope.cacheCleared = false;
+    $scope.enabled = false;
 
     $scope.refreshTable = function () {
         //If we aren't set up yet, return
@@ -22,12 +23,19 @@ angular.module("umbraco").controller("GandalfController", function ($scope, $fil
     }
 
     /*
-    * Handles clearing the cache by
-    * calling to get all items again
+    * Handles getting the app
+    * status upon load
     */
-    $scope.clearCache = function () {
-        $scope.cacheCleared = true;
-        return GandalfApi.clearCache().then($scope.fetchItems.bind(this));
+    $scope.getStatus = function () {
+        return GandalfApi.getStatus().then(function (response) { $scope.enabled = response.data.Enabled; });
+    }
+    /*
+  * Handles enabling and disabling
+  * Gandalf
+  */
+    $scope.toggleStatus = function () {
+        $scope.enabled = !$scope.enabled;
+        return GandalfApi.toggleStatus($scope.enabled);
     }
 
     /*
@@ -204,6 +212,7 @@ angular.module("umbraco").controller("GandalfController", function ($scope, $fil
     * Initial load function to set loaded state
     */
     $scope.initLoad = function () {
+        $scope.getStatus();
         if (!$scope.initialLoad) {
             //Get the available log dates to view log entries for.
             $scope.fetchItems()
@@ -261,6 +270,16 @@ angular.module("umbraco.resources").factory("GandalfApi", function ($http) {
         //Clear cache
         clearCache: function () {
             return $http.post("backoffice/Gandalf/AllowedIpApi/ClearCache");
+        },
+
+        //Toggle status
+        toggleStatus: function (data) {
+            return $http.post("backoffice/Gandalf/AllowedIpApi/ToggleStatus", { currentStatus: data }).then(successCallback, errorCallback);
+        },
+
+        //return status
+        getStatus: function () {
+            return $http.post("backoffice/Gandalf/AllowedIpApi/getStatus");
         }
     };
 });

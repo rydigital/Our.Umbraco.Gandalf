@@ -137,6 +137,9 @@
     <Reference Include="NPoco, Version=3.9.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NPoco.3.9.4\lib\net45\NPoco.dll</HintPath>
     </Reference>
+    <Reference Include="Our.Umbraco.OpenKeyValue, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Our.Umbraco.OpenKeyValue.1.0.0\lib\net472\Our.Umbraco.OpenKeyValue.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
@@ -271,6 +274,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Constants\GandalfConstants.cs" />
+    <Compile Include="Core\Models\Api\Response\StatusResponse.cs" />
+    <Compile Include="Core\Models\Api\Request\UpdateStatusRequest.cs" />
     <Compile Include="Core\NotAllowedLastChangeContentFinder.cs" />
     <Compile Include="Core\Extensions\AllowedIpExtensions.cs" />
     <Compile Include="Core\Models\DTOs\AllowedIpDto.cs" />
@@ -279,12 +285,12 @@
     <Compile Include="Core\Extensions\StringExtensions.cs" />
     <Compile Include="Core\Repositories\IRepository.cs" />
     <Compile Include="Core\StartUp\Migrations\CreateAllowedIpTable.cs" />
-    <Compile Include="Core\Models\Api\AddRequest.cs" />
-    <Compile Include="Core\Models\Api\AddResponse.cs" />
-    <Compile Include="Core\Models\Api\DeleteResponse.cs" />
+    <Compile Include="Core\Models\Api\Request\AddRequest.cs" />
+    <Compile Include="Core\Models\Api\Response\AddResponse.cs" />
+    <Compile Include="Core\Models\Api\Response\DeleteResponse.cs" />
     <Compile Include="Core\Models\Pocos\AllowedIp.cs" />
-    <Compile Include="Core\Models\Api\UpdateRequest.cs" />
-    <Compile Include="Core\Models\Api\UpdateResponse.cs" />
+    <Compile Include="Core\Models\Api\Request\UpdateRequest.cs" />
+    <Compile Include="Core\Models\Api\Response\UpdateResponse.cs" />
     <Compile Include="Core\Controllers\Backoffice\AllowedApiController.cs" />
     <Compile Include="Core\StartUp\IpLockerComposer.cs" />
     <Compile Include="Core\AllowedIpContentFinder.cs" />

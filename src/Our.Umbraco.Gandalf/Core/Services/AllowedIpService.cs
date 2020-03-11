@@ -1,10 +1,14 @@
-﻿using Our.Umbraco.Gandalf.Core.Extensions;
+﻿using Our.Umbraco.Gandalf.Core.Constants;
+using Our.Umbraco.Gandalf.Core.Extensions;
 using Our.Umbraco.Gandalf.Core.Models.DTOs;
 using Our.Umbraco.Gandalf.Core.Models.Pocos;
 using Our.Umbraco.Gandalf.Core.Repositories;
+using Our.Umbraco.OpenKeyValue.Core.Models.Pocos;
+using Our.Umbraco.OpenKeyValue.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 
 namespace Our.Umbraco.Gandalf.Core.Services
 {
@@ -15,17 +19,22 @@ namespace Our.Umbraco.Gandalf.Core.Services
 		AllowedIpDto Create(string ipAddress, string notes);
 		IEnumerable<AllowedIpDto> GetAll();
 		AllowedIpDto Update(AllowedIpDto poco);
+		KeyValueDto UpdateAppStatus(string value);
+		KeyValueDto GetStatus();
 		void Delete(int id);
 	}
 
 	public class AllowedIpService : IAllowedIpService
 	{
 		private readonly IRepository _repository;
+		private readonly IOpenKeyValueService _service;
 
-		public AllowedIpService(IRepository repository)
+		public AllowedIpService(IRepository repository, IOpenKeyValueService service)
 		{
 			_repository = repository;
+			_service = service;
 		}
+
 
 		public AllowedIpDto Create(string ipAddress, string notes)
 		{
@@ -52,7 +61,7 @@ namespace Our.Umbraco.Gandalf.Core.Services
 
 		public AllowedIpDto GetByIpAddress(string ipAddress)
 		{
-			return _repository.GetByIpAddress(ipAddress).ToDto();
+			return _repository.GetByIpAddress(ipAddress)?.ToDto();
 		}
 
 		public IEnumerable<AllowedIpDto> GetAll()
@@ -76,6 +85,26 @@ namespace Our.Umbraco.Gandalf.Core.Services
 			};
 
 			return _repository.Update(poco).ToDto();
+		}
+
+		public KeyValueDto UpdateAppStatus(string value)
+		{
+			return this._service.Set(GandalfConstants.Key, value);
+		}
+
+		public KeyValueDto GetStatus()
+		{
+			var status = _service.Get(GandalfConstants.Key);
+			
+			if (status != null) 
+			{ 
+				return status; 
+			}
+			
+			// when there is no status, set it to false
+			status = UpdateAppStatus(false.ToString());
+			
+			return status;
 		}
 	}
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
+using Our.Umbraco.Gandalf.Core.Models.Api.Request;
 
 namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 {
@@ -78,10 +79,28 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
             }
         }
 
-        [HttpPost]
-        public void ClearCache()
-        {
-			throw new Exception("Not sure if we should implement this");
-        }
-    }
+		[HttpGet]
+		public StatusResponse GetStatus()
+		{
+			var status = _allowedIpService.GetStatus();
+			bool.TryParse(status.Value, out bool boolValue);
+
+			return new StatusResponse() { Enabled = boolValue };
+		}
+
+		[HttpPost]
+		public StatusResponse ToggleStatus(UpdateStatusRequest model)
+		{
+			try
+			{
+				var item = _allowedIpService.UpdateAppStatus(model.CurrentStatus.ToString());
+				return new StatusResponse() { Success = true, Message = "Status successfully updated" };
+			}
+			catch (Exception e)
+			{
+				return new StatusResponse() { Success = false, Message = "There was an error updating the status" + e.Message };
+			}
+
+		}
+	}
 }

@@ -23,14 +23,12 @@ angular.module("umbraco").controller("GandalfController", function ($scope, $fil
     }
 
     /*
-    * Handles clearing the cache by
-    * calling to get all items again
+    * Handles getting the app
+    * status upon load
     */
-    $scope.clearCache = function () {
-        $scope.cacheCleared = true;
-        return GandalfApi.clearCache().then($scope.fetchItems.bind(this));
+    $scope.returnStatus = function () {
+        return GandalfApi.returnStatus().then(function (response) { $scope.enabled = response.data.Enabled; });
     }
-
     /*
   * Handles enabling and disabling
   * Gandalf
@@ -214,6 +212,7 @@ angular.module("umbraco").controller("GandalfController", function ($scope, $fil
     * Initial load function to set loaded state
     */
     $scope.initLoad = function () {
+        $scope.returnStatus();
         if (!$scope.initialLoad) {
             //Get the available log dates to view log entries for.
             $scope.fetchItems()
@@ -276,8 +275,11 @@ angular.module("umbraco.resources").factory("GandalfApi", function ($http) {
         //Toggle status
         toggleStatus: function (data) {
             return $http.post("backoffice/Gandalf/AllowedIpApi/ToggleStatus", { currentStatus: data }).then(successCallback, errorCallback);
-        }
+        },
 
         //return status
+        returnStatus: function () {
+            return $http.post("backoffice/Gandalf/AllowedIpApi/ReturnStatus");
+        }
     };
 });

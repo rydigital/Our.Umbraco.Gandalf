@@ -79,24 +79,31 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
             }
         }
 
-        [HttpPost]
-        public void ClearCache()
-        {
-			throw new Exception("Not sure if we should implement this");
-        }
+		[HttpGet]
+		public StatusResponse ReturnStatus()
+		{
+			var status = _allowedIpService.GetStatus();
+			bool.TryParse(status.Value, out bool boolValue);
+
+			if (boolValue)
+			{
+				return new StatusResponse() { Enabled = true };
+			}
+			return new StatusResponse() { Enabled = false };
+		}
 
 		[HttpPost]
-		public UpdateResponse ToggleStatus(UpdateStatus model)
+		public StatusResponse ToggleStatus(UpdateStatus model)
 		{
-		
+
 			try
 			{
 				var item = _allowedIpService.UpdateAppStatus(GandalfConstants.Key, model.CurrentStatus.ToString());
-				return new UpdateResponse() { Success = true, Message = "Status successfully updated" };
+				return new StatusResponse() { Success = true, Message = "Status successfully updated" };
 			}
 			catch (Exception e)
 			{
-				return new UpdateResponse() { Success = false, Message = "There was an error updating the status" + e.Message };
+				return new StatusResponse() { Success = false, Message = "There was an error updating the status" + e.Message };
 			}
 
 		}

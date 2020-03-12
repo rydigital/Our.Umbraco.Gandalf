@@ -14,7 +14,7 @@ namespace Our.Umbraco.Gandalf.Core.StartUp
 
 		public void Compose(Composition composition)
 		{
-			if (ConfigurationManager.AppSettings["AllowedIpServiceCache:Enabled"] == "true")
+			if (ConfigurationManager.AppSettings["AllowedIpServiceCache:Enabled"] == "true" || ConfigurationManager.AppSettings["AllowedIpServiceCache:Enabled"] == null)
 			{
 				composition.Register<AllowedIpService, AllowedIpService>();
 				composition.Register<IAllowedIpService, AllowedIpServiceCachedProxy>();

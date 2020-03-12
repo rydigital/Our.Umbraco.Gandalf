@@ -4,8 +4,6 @@ using Our.Umbraco.Gandalf.Core.Repositories;
 using Our.Umbraco.Gandalf.Core.Services;
 using System.Configuration;
 using System.ComponentModel;
-using DangEasy.Interfaces.Caching;
-using DangEasy.Caching.MemoryCache;
 using Umbraco.Core;
 using Our.Umbraco.Gandalf.Core.Services.CachedProxies;
 
@@ -16,8 +14,6 @@ namespace Our.Umbraco.Gandalf.Core.StartUp
 
 		public void Compose(Composition composition)
 		{
-			composition.Register(typeof(ICache), typeof(Cache));
-
 			if (ConfigurationManager.AppSettings["AllowedIpServiceCache:Enabled"] == "true")
 			{
 				composition.Register<AllowedIpService, AllowedIpService>();

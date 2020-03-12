@@ -7,7 +7,6 @@ using System.Web.Mvc;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 using Our.Umbraco.Gandalf.Core.Models.Api.Request;
-using Our.Umbraco.Gandalf.Core.Services.CachedProxies;
 
 namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 {
@@ -16,7 +15,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
     {
         private IAllowedIpService _allowedIpService;
 
-        public AllowedIpApiController(AllowedIpService allowedIpService)
+        public AllowedIpApiController(IAllowedIpService allowedIpService)
         {
 			_allowedIpService = allowedIpService;
         }

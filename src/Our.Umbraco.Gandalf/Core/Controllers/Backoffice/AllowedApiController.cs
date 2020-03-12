@@ -14,18 +14,18 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
     [PluginController("Gandalf")]
     public class AllowedIpApiController : UmbracoAuthorizedApiController
     {
-        private IAllowedIpService _allowedIpServiceCachedProxy;
+        private IAllowedIpService _allowedIpService;
 
-        public AllowedIpApiController(AllowedIpServiceCachedProxy allowedIpServiceCachedProxy)
+        public AllowedIpApiController(AllowedIpService allowedIpService)
         {
-			_allowedIpServiceCachedProxy = allowedIpServiceCachedProxy;
+			_allowedIpService = allowedIpService;
         }
 
 
         [HttpGet]
         public IEnumerable<AllowedIpDto> GetAll()
         {
-            return _allowedIpServiceCachedProxy.GetAll();
+            return _allowedIpService.GetAll();
         }
 
         [HttpPost]
@@ -36,7 +36,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 
             try
             {
-                var item = _allowedIpServiceCachedProxy.Create(request.ipAddress, request.Notes);
+                var item = _allowedIpService.Create(request.ipAddress, request.Notes);
                 return new AddResponse() { Success = true, Item = item };
             }
             catch(Exception e)
@@ -55,7 +55,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 
             try
             {
-                var item = _allowedIpServiceCachedProxy.Update(request.Item);
+                var item = _allowedIpService.Update(request.Item);
                 return new UpdateResponse() { Success = true, Item = item };
             }
             catch (Exception e)
@@ -71,7 +71,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 
             try
             {
-				_allowedIpServiceCachedProxy.Delete(id);
+				_allowedIpService.Delete(id);
                 return new DeleteResponse() { Success = true };
             }
             catch(Exception e)
@@ -83,7 +83,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 		[HttpGet]
 		public StatusResponse GetStatus()
 		{
-			var status = _allowedIpServiceCachedProxy.GetStatus();
+			var status = _allowedIpService.GetStatus();
 			bool.TryParse(status.Value, out bool boolValue);
 
 			return new StatusResponse() { Enabled = boolValue };
@@ -94,7 +94,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 		{
 			try
 			{
-				var item = _allowedIpServiceCachedProxy.UpdateAppStatus(model.CurrentStatus.ToString());
+				var item = _allowedIpService.UpdateAppStatus(model.CurrentStatus.ToString());
 				return new StatusResponse() { Success = true, Message = "Status successfully updated" };
 			}
 			catch (Exception e)

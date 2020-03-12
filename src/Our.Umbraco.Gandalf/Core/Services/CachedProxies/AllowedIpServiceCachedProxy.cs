@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using DangEasy.Interfaces.Caching;
-using DangEasy.Caching.MemoryCache;
 using Our.Umbraco.Gandalf.Core.Models.DTOs;
 using Our.Umbraco.OpenKeyValue.Core.Models.Pocos;
 using System.Linq;
 using Umbraco.Core.Cache;
+using DangEasy.Caching.MemoryCache;
+using DangEasy.Interfaces.Caching;
 
 namespace Our.Umbraco.Gandalf.Core.Services.CachedProxies
 {

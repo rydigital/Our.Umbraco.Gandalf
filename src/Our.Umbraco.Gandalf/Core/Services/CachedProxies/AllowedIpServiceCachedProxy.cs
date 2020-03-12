@@ -19,14 +19,16 @@ namespace Our.Umbraco.Gandalf.Core.Services.CachedProxies
 	
 		public AllowedIpDto Create(string ipAddress, string notes)
 		{
-			_runtimeCache.ClearByRegex($"{typeof(AllowedIpServiceCachedProxy)}_(.*)");
-			return this._allowedIpService.Create(ipAddress, notes);
+			var result = this._allowedIpService.Create(ipAddress, notes);
+			_runtimeCache.ClearByRegex($"{typeof(AllowedIpServiceCachedProxy)}(.*)");
+
+			return result;
 		}
 
 		public void Delete(int id)
 		{
-			this._allowedIpService.Delete(id);
 			_runtimeCache.ClearByRegex($"{typeof(AllowedIpServiceCachedProxy)}_(.*)");
+			this._allowedIpService.Delete(id);
 		}
 
 		public IEnumerable<AllowedIpDto> GetAll()
@@ -43,7 +45,7 @@ namespace Our.Umbraco.Gandalf.Core.Services.CachedProxies
 		public AllowedIpDto GetByIpAddress(string ipAddress)
 		{
 			var cacheKey = $"{typeof(AllowedIpServiceCachedProxy)}";
-			return GetAll().FirstOrDefault(a =>a.IpAddress.Equals(ipAddress));
+			return _runtimeCache.GetCacheItem(cacheKey, () => GetByIpAddress(ipAddress));		
 		}
 
 		public KeyValueDto GetStatus()
@@ -53,14 +55,18 @@ namespace Our.Umbraco.Gandalf.Core.Services.CachedProxies
 
 		public AllowedIpDto Update(AllowedIpDto poco)
 		{
-			_runtimeCache.ClearByRegex($"{typeof(AllowedIpServiceCachedProxy)}_(.*)");
-			return this._allowedIpService.Update(poco);
+			var result = this._allowedIpService.Update(poco);
+			_runtimeCache.ClearByRegex($"{typeof(AllowedIpServiceCachedProxy)}(.*)");
+			
+			return result;
+
 		}
 
 		public KeyValueDto UpdateAppStatus(string value)
 		{
+			var result = this._allowedIpService.UpdateAppStatus(value);
 			_runtimeCache.ClearByRegex($"{typeof(AllowedIpServiceCachedProxy)}_(.*)");
-			return this._allowedIpService.UpdateAppStatus(value);
+			return result;
 		}
 
 	}

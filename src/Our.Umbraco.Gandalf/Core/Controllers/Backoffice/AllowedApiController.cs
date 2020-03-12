@@ -17,7 +17,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 
         public AllowedIpApiController(IAllowedIpService allowedIpService)
         {
-            _allowedIpService = allowedIpService;
+			_allowedIpService = allowedIpService;
         }
 
 
@@ -70,7 +70,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 
             try
             {
-                _allowedIpService.Delete(id);
+				_allowedIpService.Delete(id);
                 return new DeleteResponse() { Success = true };
             }
             catch(Exception e)

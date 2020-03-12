@@ -21,11 +21,12 @@ namespace Our.Umbraco.Gandalf.Core.StartUp
 
 			if (ConfigurationManager.AppSettings["AllowedIpServiceCache:Enabled"] == "true")
 			{
-				composition.Register(typeof(IAllowedIpService), typeof(AllowedIpServiceCachedProxy));
-	}
+				composition.Register<AllowedIpService, AllowedIpService>();
+				composition.Register<IAllowedIpService, AllowedIpServiceCachedProxy>();
+			}
 			else
 			{
-				composition.Register(typeof(IAllowedIpService), typeof(AllowedIpService));
+				composition.Register<IAllowedIpService, AllowedIpService>();
 			}
 		}
 	}

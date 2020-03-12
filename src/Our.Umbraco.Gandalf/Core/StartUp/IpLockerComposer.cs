@@ -32,9 +32,6 @@ namespace Our.Umbraco.Gandalf.Core.StartUp
 			composition.ContentFinders().Insert<NotAllowedLastChangeContentFinder>(0);
 			composition.ContentFinders().Insert<AllowedIpContentFinder>(1);
 
-			//register the dangeasy caching stuff
-
-
 		}
 	}
 }

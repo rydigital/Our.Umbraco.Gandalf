@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using Our.Umbraco.Gandalf.Core.Models.DTOs;
-using Our.Umbraco.OpenKeyValue.Core.Models.Pocos;
-using System.Linq;
 using Umbraco.Core.Cache;
 
 namespace Our.Umbraco.Gandalf.Core.Services.CachedProxies
@@ -48,7 +46,7 @@ namespace Our.Umbraco.Gandalf.Core.Services.CachedProxies
 			return _runtimeCache.GetCacheItem(cacheKey, () => _allowedIpService.GetByIpAddress(ipAddress));
 		}
 
-		public KeyValueDto GetStatus()
+		public StatusDto GetStatus()
 		{
 			return this._allowedIpService.GetStatus();
 		}
@@ -62,7 +60,7 @@ namespace Our.Umbraco.Gandalf.Core.Services.CachedProxies
 
 		}
 
-		public KeyValueDto UpdateAppStatus(string value)
+		public StatusDto UpdateAppStatus(string value)
 		{
 			var result = this._allowedIpService.UpdateAppStatus(value);
 			ClearCache();

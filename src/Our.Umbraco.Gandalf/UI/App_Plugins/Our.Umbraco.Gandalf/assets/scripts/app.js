@@ -279,7 +279,7 @@ angular.module("umbraco.resources").factory("GandalfApi", function ($http) {
 
         //return status
         getStatus: function () {
-            return $http.post("backoffice/Gandalf/AllowedIpApi/getStatus");
+            return $http.get("backoffice/Gandalf/AllowedIpApi/getStatus");
         }
     };
 });

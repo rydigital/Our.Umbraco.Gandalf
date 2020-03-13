@@ -15,6 +15,7 @@
     <releaseNotes></releaseNotes>
 	<dependencies>
 	  <dependency id="UmbracoCms.Core" version="8.1.0" />
+	  <dependency id="Our.Umbraco.OpenKeyValue" version="1.0" />
     </dependencies>
   </metadata>
   <files>

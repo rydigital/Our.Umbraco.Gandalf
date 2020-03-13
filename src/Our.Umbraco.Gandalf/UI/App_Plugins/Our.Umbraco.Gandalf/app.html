@@ -8,17 +8,13 @@
                 <div class="page-header">
                     <h1>
                         <i class="md md-list"></i>
-                        Gandalf
+                        Allowed IPs
                     </h1>
 
                     <!-- Turn Gandalf Off -->
                     <div class="pull-right">
                         <button ng-class="{'btn btn-primary btn-sm': enabled, 'btn btn-info btn-sm': !enabled}" ng-click="toggleStatus()"  >Status : <span>{{enabled ? "Enabled" : "Disabled" }}</span></button>
                     </div>
-
-                    <p class="lead">
-                        Add, Update, and Delete IPs in the table below.
-                    </p>
                 </div>
 
                 <!-- Filter Content -->
@@ -52,7 +48,7 @@
                             <tbody>
                                 <tr ng-repeat="item in $data">
                                     <td data-title="'IP Address'" sortable="'IpAddress'">
-                                        <span ng-if="!item.$edit">{{item.IpAddress}}</span>
+                                        <!--<span ng-if="!item.$edit">{{item.IpAddress}}</span>-->
                                         <a ng-if="!item.$edit" href="{{item.IpAddress}}" target="_blank">{{item.IpAddress}}</a>
                                         <div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.IpAddress" placeholder="IP Address" no-dirty-check /></div>
                                     </td>

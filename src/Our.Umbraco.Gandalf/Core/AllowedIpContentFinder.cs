@@ -16,7 +16,7 @@ namespace Our.Umbraco.Gandalf.Core
 		{
 			var status = _allowedIpService.GetStatus();
 
-			if (status.Value != true.ToString())
+			if (!status.Enabled)
 			{
 				return false;
 			}

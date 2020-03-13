@@ -3,7 +3,6 @@ using Our.Umbraco.Gandalf.Core.Extensions;
 using Our.Umbraco.Gandalf.Core.Models.DTOs;
 using Our.Umbraco.Gandalf.Core.Models.Pocos;
 using Our.Umbraco.Gandalf.Core.Repositories;
-using Our.Umbraco.OpenKeyValue.Core.Models.Pocos;
 using Our.Umbraco.OpenKeyValue.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -19,20 +18,20 @@ namespace Our.Umbraco.Gandalf.Core.Services
 		AllowedIpDto Create(string ipAddress, string notes);
 		IEnumerable<AllowedIpDto> GetAll();
 		AllowedIpDto Update(AllowedIpDto poco);
-		KeyValueDto UpdateAppStatus(string value);
-		KeyValueDto GetStatus();
+		StatusDto UpdateAppStatus(string value);
+		StatusDto GetStatus();
 		void Delete(int id);
 	}
 
 	public class AllowedIpService : IAllowedIpService
 	{
 		private readonly IRepository _repository;
-		private readonly IOpenKeyValueService _service;
+		private readonly IOpenKeyValueService _keyValueService;
 
-		public AllowedIpService(IRepository repository, IOpenKeyValueService service)
+		public AllowedIpService(IRepository repository, IOpenKeyValueService keyValueService)
 		{
 			_repository = repository;
-			_service = service;
+			_keyValueService = keyValueService;
 		}
 
 
@@ -87,24 +86,24 @@ namespace Our.Umbraco.Gandalf.Core.Services
 			return _repository.Update(poco).ToDto();
 		}
 
-		public KeyValueDto UpdateAppStatus(string value)
+		public StatusDto UpdateAppStatus(string value)
 		{
-			return this._service.Set(GandalfConstants.Key, value);
+			var result = _keyValueService.Set(GandalfConstants.Key, value).ToDto();
+
+			return result;
 		}
 
-		public KeyValueDto GetStatus()
+		public StatusDto GetStatus()
 		{
-			var status = _service.Get(GandalfConstants.Key);
-			
-			if (status != null) 
-			{ 
-				return status; 
+			var status = _keyValueService.Get(GandalfConstants.Key);
+
+			if (status != null)
+			{
+				return status.ToDto();
 			}
-			
+
 			// when there is no status, set it to false
-			status = UpdateAppStatus(false.ToString());
-			
-			return status;
+			return UpdateAppStatus(false.ToString());
 		}
 	}
 }

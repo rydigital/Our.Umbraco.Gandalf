@@ -17,7 +17,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 
         public AllowedIpApiController(IAllowedIpService allowedIpService)
         {
-            _allowedIpService = allowedIpService;
+			_allowedIpService = allowedIpService;
         }
 
 
@@ -70,7 +70,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 
             try
             {
-                _allowedIpService.Delete(id);
+				_allowedIpService.Delete(id);
                 return new DeleteResponse() { Success = true };
             }
             catch(Exception e)
@@ -83,9 +83,8 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 		public StatusResponse GetStatus()
 		{
 			var status = _allowedIpService.GetStatus();
-			bool.TryParse(status.Value, out bool boolValue);
 
-			return new StatusResponse() { Enabled = boolValue };
+			return new StatusResponse() { Enabled = status.Enabled };
 		}
 
 		[HttpPost]
@@ -94,6 +93,7 @@ namespace Our.Umbraco.Gandalf.Controllers.Backoffice
 			try
 			{
 				var item = _allowedIpService.UpdateAppStatus(model.CurrentStatus.ToString());
+
 				return new StatusResponse() { Success = true, Message = "Status successfully updated" };
 			}
 			catch (Exception e)

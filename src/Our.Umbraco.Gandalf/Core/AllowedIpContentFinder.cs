@@ -24,7 +24,7 @@ namespace Our.Umbraco.Gandalf.Core
 			var ip = request.UmbracoContext.HttpContext.Request.UserHostAddress;
 			var item = _allowedIpService.GetByIpAddress(ip);
 
-			if (item != null)
+			if (item == null)
 			{
 				request.SetRedirect("/ip-not-allowed");
 

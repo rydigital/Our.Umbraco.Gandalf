@@ -64,6 +64,7 @@
 	<Target Name="PrepairFiles" DependsOnTargets="Compile">
 		<ItemGroup>
 			<CoreBinFile Include="$(CoreProjectDir)\Bin\Release\Our.Umbraco.Gandalf.dll" />
+			<KeyValueFile Include="$(CoreProjectDir)\Bin\Release\Our.Umbraco.OpenKeyValue.dll" />
 			<PackageFile Include="$(MSBuildProjectDirectory)\Package.xml" />
 			<NuSpecFile Include="$(MSBuildProjectDirectory)\package.nuspec" />
 			<AppPluginFiles Include="$(PropertyEditorProjectDir)\**\*" />
@@ -71,6 +72,7 @@
 		<Copy SourceFiles="@(CoreBinFile)" DestinationFolder="$(BuildDir)\bin" />
 		<Copy SourceFiles="@(PackageFile)" DestinationFolder="$(BuildDir)" />
 		<Copy SourceFiles="@(CoreBinFile)" DestinationFolder="$(BuildNuGetDir)\lib\net45" />
+		<Copy SourceFiles="@(KeyValueFile)" DestinationFolder="$(BuildDir)\bin" />
 		<Copy SourceFiles="@(NuSpecFile)" DestinationFolder="$(BuildNuGetDir)" />
 		<Copy SourceFiles="@(AppPluginFiles)"
 	   DestinationFiles="@(AppPluginFiles->'$(BuildDir)\%(RecursiveDir)%(Filename)%(Extension)')" />

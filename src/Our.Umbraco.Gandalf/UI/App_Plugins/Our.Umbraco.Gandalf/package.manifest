@@ -9,11 +9,11 @@
 	],
 	"dashboards": [
 		{
-            "alias": "Our.Umbraco.Gandalf",
-			      "name": "Our.Umbraco.Gandalf",
-            "view":  "/App_Plugins/Our.Umbraco.Gandalf/app.html",
-            "sections":  [ "content" ],
-            "weight": -10
-        }
+			"alias": "Our.Umbraco.Gandalf",
+			"name": "Our.Umbraco.Gandalf",
+			"view": "/App_Plugins/Our.Umbraco.Gandalf/app.html",
+			"sections": [ "content" ],
+			"weight": -10
+		}
 	]
 }
